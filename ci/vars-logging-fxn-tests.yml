@@ -1,0 +1,23 @@
+---
+run-tests:
+  - name: run_functional_logging_tests
+    source: "{{ ansible_user_dir }}/{{ zuul.projects[’github.com/infrawatch/feature-verification-tests/tree/alexy_logging'].src_dir }}roles/telemetry_logging/tasks/main.yml"
+    type: playbook
+cifmw_edpm_prepare_kustomizations:
+  - apiVersion: kustomize.config.k8s.io/v1beta1
+    kind: Kustomization
+    namespace: openstack
+    patches:
+    - patch: |-
+        apiVersion: core.openstack.org/v1beta1
+        kind: OpenStackControlPlane
+        metadata:
+          name: unused
+        spec:
+          telemetry:
+            enabled: true
+            template:
+              logging:
+                enabled: true
+      target:
+        kind: OpenStackControlPlane
