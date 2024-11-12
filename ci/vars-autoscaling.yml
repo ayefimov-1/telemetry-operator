@@ -27,3 +27,22 @@ cifmw_edpm_prepare_kustomizations:
                 enabled: true
       target:
         kind: OpenStackControlPlane
+    - patch: |-
+        apiVersion: core.openstack.org/v1beta1
+        kind: OpenStackDataPlaneNodeSet
+        metadata:
+          name: unused
+        spec:
+          heat:
+            enabled: true
+          telemetry:
+            enabled: true
+            template:
+              metricStorage:
+                enabled: true
+                monitoringStack:
+                  alertingEnabled: false
+              autoscaling:
+                enabled: true
+      target:
+        kind: OpenStackDataPlaneNodeSet
