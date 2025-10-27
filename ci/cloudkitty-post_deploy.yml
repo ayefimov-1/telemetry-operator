@@ -26,10 +26,10 @@
     #    cmd: |
     #      oc patch oscp $(oc get oscp -ojsonpath='{ .items[].metadata.name }') --type=json -p='[{"op": "replace", "path": "/spec/telemetry/enabled", "value": false} ]'
 
-    - name: Deploy loki operator
-      ansible.builtin.shell:
-        cmd: |
-          oc apply -f {{ ansible_user_dir }}/{{ zuul.projects['github.com/openstack-k8s-operators/telemetry-operator'].src_dir }}/deploy-loki-for-ck.yaml
+  # - name: Deploy loki operator
+  #   ansible.builtin.shell:
+  #     cmd: |
+  #       oc apply -f {{ ansible_user_dir }}/{{ zuul.projects['github.com/openstack-k8s-operators/telemetry-operator'].src_dir }}/deploy-loki-for-ck.yaml
 
 
     - name: Get install plan from the list of installplans (not used)
